@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>VALIDATIONS</title>
+</head>
+<body>
+<form method="post" action="https://accounts.google.com/ServiceLogin?service=mail&passive=true&rm=false&continue=https://mail.google.com/mail/?tab%3Dwm&scc=1&ltmpl=default&ltmplcache=2&emr=1" onSubmit="return Validate()">
+<table border="3">
+<tr><th>username</th></tr>
+<tr><td><input type="text" maxlength="10"></td></tr>
+<tr><th>password</th></tr>
+<tr><td><input type="password" minlength="6"></td></tr>
+<tr><td><input type="Submit" value="Submit"></td</tr>
+<tr><td><input type="Reset" value="Reset"></td></tr>
+</table>
+</form>
+<script language="Javascript">
+function Validate()
+{
+var valid=false;
+var username=document.forms[0].elements[0].value;
+var password=document.forms[0].elements[1].value;
+username_re=new RegExp("^[a-zA-Z ' @ # +%]+$","g");
+password_re=new RegExp("^[\\d]+$","g");
+if(username.match(username_re))
+{
+if(password.match(password_re))
+{
+valid=true;
+}
+else
+{
+alert("password is wrong");
+}
+}
+else
+{
+alert("username s invalid");
+}
+return valid;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+SQL> select * from sailors;
+
+      S_ID S_NAME              RATING        AGE
+---------- --------------- ---------- ----------
+        22 dustin                   7         45
+        29 brutus                   1         35
+        31 lubber                   8         55
+        32 amdy                     8         25
+        58 rusty                   10         35
+        64 haratio                  7         35
+        71 zorba                   10         16
+        74 horatio                  9         35
+        85 art                      3         25
+        95 bob                      3         25
+
+10 rows selected.
+
+SQL> select * from reservers;
+
+SI BID DAY
+-- --- ----------
+22 101 10/10/98
+22 102 10/10/98
+22 103 10/8/98
+22 104 10/7/98
+31 102 11/10/98
+31 103 11/6/98
+31 104 11/12/98
+64 101 9/5/98
+64 102 9/8/98
+64 103 9/8/98
+
+10 rows selected.
+
+SQL> select * from boats;
+
+      B_ID B_NAME          COLOUR
+---------- --------------- ----------
+       101 interlake       blue
+       102 interlake       red
+       103 clipper         green
+       104 marine          red
+
+SQL> select * from std1;
+
+       SID SNAME                LOGIN                       AGE        GPA
+---------- -------------------- -------------------- ---------- ----------
+     50000 Dave                 Dave@cs                      19        3.3
+     53666 Jones                Jones@cs                     18        2.4
+     53688 Smith                Smith@cs                     18        5.6
+     53650 Smith                Smith@cs                     18        2.5
+     53831 Madayan              Madayan@cs                   19        3.4
+     53832 Guldu                Guldu@cs                     16        2.5
+
+6 rows selected.
+
+SQL> select * from enrolled;
+
+    STD_ID C_ID                 GRA
+---------- -------------------- ---
+     53831 carnatic 101         c
+     53832 reggae 203           b
+     53650 topology 112         a
+     53666 history 105          b
+
+SQL> select * from B_students;
+
+NAME                        SID COURSE
+-------------------- ---------- --------------------
+Smith                     53650 topology 112

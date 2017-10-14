@@ -1,0 +1,316 @@
+Agentreport.cs
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Data.SqlClient;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication4
+{
+    public partial class Agentreport : Form
+    {
+        public Agentreport()
+        {
+            InitializeComponent();
+        }
+
+        private void research_Load(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            NewUser patinew = new NewUser();
+            patinew.Show();
+            linkLabel3.Visible = true;
+            this.Hide();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Alladmin al = new Alladmin();
+            al.Show();
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(@"server=NEOAPP21\SQLEXPRESS;database=privacy;user id=sa;password=neoapp123");
+            con.Open();
+            string cmd = "select dname as 'Doctorname',age as 'Age',gender as 'Sex', department  as 'Department',dtime  as 'RegisterTime', password as 'ID' from doctors";
+            DataSet ds = new DataSet();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd, con);
+            sda.Fill(ds);
+            dataGridView2.DataSource = ds.Tables[0].DefaultView;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(@"server=NEOAPP21\SQLEXPRESS;database=privacy;user id=sa;password=neoapp123");
+            con.Open();
+            string cmd = "select pname  as 'Patient Name',age as 'Age',phoneno as 'Contact Number',gender as 'Sex', dtime  as 'Registertime' from patient";
+            DataSet ds = new DataSet();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd, con);
+            sda.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0].DefaultView;
+        }
+    }
+}
+
+DoctorRegister.cs:
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.IO;
+using System.Data.SqlClient;
+
+
+namespace WindowsFormsApplication4
+{
+    
+    
+    public partial class Doctorregisters : Form
+    {
+
+        public static string randamkeys;
+
+        SqlConnection conn = new SqlConnection(@"server=NEOAPP21\SQLEXPRESS;database=privacy;user id=sa;password=neoapp123");
+
+
+
+        public Doctorregisters()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            randamkeys = Path.GetRandomFileName();
+
+            string name = textBox1.Text;
+
+            string age = textBox2.Text;
+
+            string gender = comboBox1.SelectedItem.ToString();
+
+            string department = textBox3.Text; ;
+
+            if (conn.State == ConnectionState.Closed)
+                conn.Open();
+            SqlCommand cmd = new SqlCommand("insert into doctors (dname,age,gender,department,password,dtime) values('" + name+ "','" + age+ "','" + gender+ "','"+department+"','" + randamkeys + "','"+DateTime.Now+"')", conn);
+            cmd.ExecuteNonQuery(); 
+
+           
+            //cmd.ExecuteNonQuery();
+            MessageBox.Show("Your ID is" + randamkeys);
+            textBox6.Text = randamkeys;
+
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Doclogin hosd = new Doclogin();
+            hosd.Show();
+            linkLabel1.Visible = true;
+            this.Hide();
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Alladmin al = new Alladmin();
+            al.Show();
+            this.Hide();
+        }
+    }
+}
+
+Pdoctordetails.cs:
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.IO;
+using System.Data.SqlClient;
+
+namespace WindowsFormsApplication4
+{
+    public partial class pdoctordetails : Form
+    {
+        SqlConnection conn = new SqlConnection(@"server=NEOAPP21\SQLEXPRESS;database=privacy;user id=sa;password=neoapp123");
+        public pdoctordetails()
+        {
+            InitializeComponent();
+        }
+
+        private void pdoctordetails_Load(object sender, EventArgs e)
+        {
+            //label2.Text = Exploitinglogin.name;
+            label8.Text  = patient.password;
+            
+        }
+
+        private void docpid_txt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SubmitPId_btn_Click(object sender, EventArgs e)
+        {
+             conn.Open();
+
+             SqlCommand cmd = new SqlCommand("Select pname,age,disease,secretkey From patientupdate Where password='" + textBox1.Text + "'", conn);
+
+            SqlDataReader dr;
+
+            dr = cmd.ExecuteReader();
+            try
+            {
+                if (dr.HasRows==false)
+                {
+                    MessageBox.Show("Enter correct ID");
+
+                }
+                        if (dr.Read())
+                        {
+                            textBox2.Text = dr["pname"].ToString();
+                            textBox3.Text = dr["age"].ToString();
+                            textBox4.Text = dr["disease"].ToString();
+                            textBox5.Text = dr["secretkey"].ToString();
+
+                        
+                        }
+                        else
+                        {
+                            //label1.Text = "Password is incorrect";
+                            //MessageBox.Show("password is incorrect");
+                        }
+                }
+            
+            finally
+            {
+                //label1.Text = "user name is incorrect";
+            }
+            conn.Close();
+        
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("Select diseasedetails,secretkey  From patientupdate Where password='" + Pidkey_txt.Text + "'", conn);
+
+            SqlDataReader dr;
+
+            dr = cmd.ExecuteReader();
+            try
+           
+            {
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                        if (docpid_txt.Text == dr["secretkey"].ToString())
+                        {
+                            textBox6.Text=dr["diseasedetails"].ToString();
+                           
+                            
+
+
+                        }
+                        else
+                        {
+                            
+                            //MessageBox.Show("password is incorrect");
+                            //txtkey.Text = "";
+                        }
+                }
+            }
+            
+            finally
+            {
+                //label1.Text = "user name is incorrect";
+            }
+            conn.Close();
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            patient p = new patient();
+            p.Show();
+            this.Hide();
+        }
+    }
+}
+
+Homepage.cs:
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication4
+{
+    public partial class homepage : Form
+    {
+        public homepage()
+        {
+            InitializeComponent();
+        }
+
+        private void Patient_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            patient pa = new patient();
+            pa.Show();
+        }
+
+        private void Doctor_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Doclogin r = new Doclogin();
+            r.Show();
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            
+            receplog d = new receplog();
+            d.Show();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            hospitaladmin adminss = new hospitaladmin();
+            adminss.Show();
+            linkLabel1.Visible = true;
+        }
+    }
+}

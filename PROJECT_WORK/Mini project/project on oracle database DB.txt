@@ -1,0 +1,20 @@
+Student Table
+CREATE TABLE Student(S_id NUMBER(3) NOT NULL,S_Name CHAR(30) NOT NULL,C_id NUMBER(3) NOT NULL,Phone_no NUMBER(10) NOT NULL,Email_id VARCHAR2(20),Acc_id VARCHAR2(3) NOT NULL,Fee_Status CHAR(3) NOT NULL,PRIMARY KEY(S_id) FOREIGN KEY REFERENCES Courses(C_id));
+
+Department Table
+CREATE TABLE Dept(Dep_id NUMBER(3) NOT NULL,Dep_Name CHAR(30) NOT NULL,C_id NUMBER(3) NOT NULL,Dep_Location CHAR(10),PRIMARY KEY(Dep_id)FOREIGN KEY REFERENCES Courses(C_id) );
+
+Employee Table
+CREATE TABLE Employee(Emp_id NUMBER(3) NOT NULL,Emp_Name CHAR(30) NOT NULL,C_id NUMBER(3) NOT NULL,Phone_no NUMBER(10) NOT NULL,Email_id CHAR(20),Hiredate VARCHAR(8) NOT NULL,Salary  NUMBER(5) NOT NULL,PRIMARY KEY(Emp_id) );
+
+Account Table
+CREATE TABLE Account(Acc_id NUMBER(15) NOT NULL,Dep_id NUMBER(3) NOT NULL,PRIMARY KEY(Acc_id)FOREIGN KEY REFERENCES Courses(C_id) );
+
+Course Table
+CREATE TABLE Course(C_id NUMBER(3) NOT NULL,C_Name CHAR(30) NOT NULL,Dept_name CHAR(15) NOT NULL,Course_Fee NUMBER(5) NOT NULL,PRIMARY KEY(C_id) );
+
+Joining
+select students.S_id,students.S_Name, Dept.Dep_Name From students join Dept on students.C_id = Dept.C_id;
+
+
+

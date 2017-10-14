@@ -1,0 +1,19 @@
+<html>
+<head>
+<title>Reverse</title>
+</head>
+<body>
+<script language="javascript">
+var n= prompt("Enter n value:","0");
+var rev=0,b;
+b=n;
+while (n!=0)
+{
+	rev=rev*10 + n%10;
+	n=(parseInt)(n/10);
+}
+document.writeln("Given number is:"+b);
+document.writeln("Reverse of given number is:"+rev);
+</script>
+</body>
+</html>

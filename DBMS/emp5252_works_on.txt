@@ -1,0 +1,72 @@
+SQL> create table works_on( emp_no integer not null,project_no char(5) not null,job char(15) null, d
+ay varchar(10));
+
+Table created.
+
+SQL> desc works_on;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                    NOT NULL NUMBER(38)
+ PROJECT_NO                                NOT NULL CHAR(5)
+ JOB                                                CHAR(15)
+ DAY                                                VARCHAR2(10)
+
+SQL> insert into works_on values(501,145,'programer','5/10/2012');
+
+1 row created.
+
+SQL> insert into works_on values(509,152,'tester','7/6/2012');
+
+1 row created.
+
+SQL> insert into works_on values(525,143,'developer','26/07/2012');
+
+1 row created.
+
+SQL> select * from works_on;
+
+    EMP_NO PROJE JOB             DAY
+---------- ----- --------------- ----------
+       501 145   programer       5/10/2012
+       509 152   tester          7/6/2012
+       525 143   developer       26/07/2012
+
+
+SQL> create table emp5252(emp_no integer not null,emp_Fname varchar(20) not null,emp_Lname varchar(2
+0) not null, dept_no char(5) null);
+
+Table created.
+
+SQL> desc emp5252;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                    NOT NULL NUMBER(38)
+ EMP_FNAME                                 NOT NULL VARCHAR2(20)
+ EMP_LNAME                                 NOT NULL VARCHAR2(20)
+ DEPT_NO                                            CHAR(5)
+
+SQL> insert into emp5252 values(501,'Abdul','Syed','d2');
+
+1 row created.
+
+SQL>  insert into emp5252 values(509,'Murali','Reddy','d3');
+
+1 row created.
+
+SQL>  insert into emp5252 values(525,'Satya','Ayyala','d1');
+
+1 row created.
+
+SQL> select * from emp5252;
+
+    EMP_NO EMP_FNAME            EMP_LNAME            DEPT_
+---------- -------------------- -------------------- -----
+       501 Abdul                Syed                 d2
+       509 Murali               Reddy                d3
+       525 Satya                Ayyala               d1
+
+SQL> select dept_no from emp5252 e,works_on w where e.emp_no=w.emp_no and day='26/07/2012';
+
+DEPT_
+-----
+d1

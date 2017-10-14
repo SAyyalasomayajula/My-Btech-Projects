@@ -1,0 +1,10 @@
+SQL>  create view B_students(name,sid,course) AS select S.sname,S.sid,E.c_id from std1 S,enrolled E 
+where S.sid=E.std_id and grade='a';
+ 
+View created.
+
+SQL> select * from B_students;
+
+NAME                        SID COURSE
+-------------------- ---------- --------------------
+Smith                     53650 topology 112

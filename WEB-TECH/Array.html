@@ -1,0 +1,45 @@
+<html >
+ <head>
+  <title>Array</title>
+ </head>
+ <body>
+	<script Language="javascript">
+	var element=new Array(1,2,3,4,5);
+	var len=element.length;
+	document.writeln("Length of array is:"+len);
+	
+	for (var i=0;i<len;i++ )
+	{
+		document.writeln("<br>"+element[i]);
+	}
+	var index= parseInt(window.prompt("Enter a position","0"));
+	for (var i=0;i<len;i++)
+	{
+		if (index==element[i])
+		{
+			document.writeln("<br>"+element[i]);
+			break;
+		}
+	}
+/*	var temp=new Array(len);
+	for (var i=0;i<len;i++ )
+	{
+		if (element[i]==index)
+		{
+			element.remove();
+			break;
+		}
+		else
+		for (var j=0;j<len;j++ )
+		{
+			temp[j]=element[i];
+		}
+	}
+	for (var i=0;i<len;i++ )
+	{
+		document.writeln("<br>"+element[i]);
+	}
+*/
+	</script>
+ </body>
+</html>

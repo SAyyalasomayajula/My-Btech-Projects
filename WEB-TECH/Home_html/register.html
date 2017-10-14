@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Register</title>
+</head>
+<body background="G:/DOC'S/MY clg files/WEB-TECH/Home_html/book5.jpg">
+<form method="post" action="G:/DOC'S/MY clg files/WEB-TECH/Home_html/login.html" onSubmit="return validate()">
+<h2 align="left"><font color="blue">First_name:<input type="text" maxlength="30" size="20"></font></h2>
+<h2 align="left"><font color="red">Middle_name:<input type="text" maxlength="15" size="20"></font></h2>
+<h2 align="left"><font color="voilet">Last_name:<input type="text" maxlength="15" size="20"></font></h2>
+<h2 align="left"><font color="green">Password:<input type="password" minlength="6"></font></h2>
+<h2 align="left"><font color="red">Re-Password:<input type="password" minlength="6"></font></h2>
+<h2 align="left"><font color="blue">Gender: Male<input type="radio">Female<input type="radio"></font></h2>
+<h2 align="left"><font color="red">Location:<select name="Place"></font></h2>
+<option name="Select">Select
+<option name="Hyderabad">Hyderabad
+<option name="rajampet">rajampet
+<option name="tirupathi">tirupathi
+<option name="kaddapa">kaddapa
+</select>
+<p align="left">comments:<br>
+<textarea name="comments" rows="5" cols="25"></textarea>
+<p align="left">I agree with terms & conditions<input type="checkbox"><br>
+<tr><td><input type="Submit" value="Submit"></td></tr>
+<tr align><td><input type="Reset" value="Reset"></td></tr>
+</form>
+<script language="Javascript">
+function validate()
+{
+var valid=false;
+var First_name=document.forms[0].elements[0].value;
+var Middle_name=document.forms[0].elements[1].value;
+var Last_name=document.forms[0].elements[2].value;
+var Password=document.forms[0].elements[3].value;
+var Re-Password=document.forms[0].elements[4].value;
+First_name_re=new RegExp("^[a-zA-Z]+$","g");
+Middle_name_re=new RegExp("^[a-zA-Z]+$","g");
+Last_name_re=new RegExp("^[a-zA-Z]+$","g");
+Password_re=new RegExp("^[\\d]+$","g");
+Re-password_re=new RegExp("^[\\d]+$","g");
+if(First_name.match(First_name_re))
+{
+if(Middle_name.match(Middle_name_re))
+{
+if(Last_name.match(Last_name_re))
+{
+if(Password.match(Password_re))
+{
+if((Re-Password.match(Re-Password_re))&&(Re-Password.match(Password)))
+{
+valid=true;
+}
+else
+{
+alert("password didnt match");
+}
+}
+else
+{
+alert("password s wrong");
+}
+}
+else
+{
+alert("last name s wrong");
+}
+}
+else
+{
+alert("middle name s wrong");
+}
+}
+else
+{
+alert("first name s wrong");
+}
+return valid;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Catalog</title>
+</head>
+<body background="G:/DOC'S/MY clg files/WEB-TECH/Home_html/cart.jpg">
+<form>
+<table border="2" cellspacing="15" cellspacing="5" cellspacing="5">
+<tr>
+<th><font size="5" color="blue">Sl.no</font></th>
+<th><font size="5" color="blue">Book</th>
+<th><font size="5" color="blue">Author</th>
+<th><font size="5" color="blue">Quantity</th>
+<th><font size="5" color="blue">Price</font></th>
+</tr>
+<tr>
+<td><font size="5" >1</td>
+<td><font size="5" >Learning UML</td>
+<td><font size="5" >Russ Miles</td>
+<td><font size="5" >100</td>
+<td><font size="5" >400</td>
+</tr>
+<tr>
+<td><font size="5" >2</td>
+<td><font size="5" >VLSI Design</td>
+<td><font size="5" >A.Albert Raj</td>
+<td><font size="5" >100</td>
+<td><font size="5" >450</td>
+</tr>
+<tr>
+<td><font size="5">Total</td>
+<td><font size="5"> </td>
+<td><font size="5"> </td>
+<td><font size="5"> </td>
+<td><font size="5">950</td>
+</tr>
+</tr>
+</table>
+<td><label><input type="button" value="Pay"></label></td>
+</form>
+</body>
+</html>

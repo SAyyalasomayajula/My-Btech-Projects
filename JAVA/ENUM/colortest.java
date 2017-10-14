@@ -1,0 +1,39 @@
+import java.io.*;
+enum color
+{
+	red,blue,green;
+}
+class colortest
+{
+	color c;
+	colortest(color c)
+	{
+		this.c=c;
+	}
+	public static void main(String[] args) throws Exception
+	{
+		System.out.println("Choose your color:");
+		System.out.println("1.RED");
+		System.out.println("2.BLUE");
+		System.out.println("3.GREEN");
+		BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
+		int ch=Integer.parseInt(br.readLine());
+			switch(ch)
+		{
+		case 1 :
+		colortest ct1=new colortest(color.red);
+		System.out.println("Red Color");	
+		break;
+		case  2 :
+		colortest ct2=new colortest(color.blue);	
+		System.out.println("Blue color");
+		break;
+		case 3 :
+		colortest ct3=new colortest(color.green);	
+		System.out.println("Green color");	
+		break;
+		default:
+			System.out.println("Invalid ");
+		}
+	}
+}

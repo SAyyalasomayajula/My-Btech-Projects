@@ -1,0 +1,21 @@
+<html >
+ <head>
+  <title>Palindrome</title>
+ </head>
+ <body>
+	<script language="jscript">
+	var n,rev=0,b;
+	n=parseInt(window.prompt("Enter n value","0"));
+	b=n;
+	while(n!=0)
+	{
+	 rev=rev*10+n%10;
+	 n=(parseInt)(n/10);
+	}
+	if(b==rev)
+	 document.writeln(b+" is a Palindrome");
+	else
+	 document.writeln(b+" is not a Palindrome");
+	</script>
+ </body>
+</html>

@@ -1,0 +1,233 @@
+
+
+SQL> create table emp525(emp_Id integer,emp_Name varchar(15),emp_salary integer);
+
+Table created.
+
+
+SQL> desc emp525
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(38)
+ EMP_NAME                                           VARCHAR2(15)
+ EMP_SALARY                                         NUMBER(38)
+
+
+
+
+SQL> create table job(emp_Id integer,emp_Title varchar(10),emp_Avg_Salary integer);
+
+Table created.
+
+SQL> desc job
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID                                             NUMBER(38)
+ EMP_TITLE                                          VARCHAR2(10)
+ EMP_AVG_SALARY                                     NUMBER(38)
+
+SQL> insert into emp525 values(501,'Majeed',1000000);
+
+1 row created.
+
+SQL>  insert into emp525 values(509,'Karthik',800000);
+
+
+1 row created.
+
+SQL>  insert into emp525 values(525,'Surya',15000000);
+
+1 row created.
+
+SQL>  insert into emp525 values(529,'Bharath',1000000);
+
+1 row created.
+
+SQL>  insert into emp525 values(538,'Sravan',50000);
+
+1 row created.
+
+SQL>  insert into emp525 values(542,'Venkatesh',750000);
+
+1 row created.
+
+SQL> select * from emp525;
+
+    EMP_ID EMP_NAME        EMP_SALARY
+---------- --------------- ----------
+       501 Majeed             1000000
+       509 Karthik             800000
+       525 Surya             15000000
+       529 Bharath            1000000
+       538 Sravan               50000
+       542 Venkatesh           750000
+
+6 rows selected.
+
+SQL> insert into job values(501,'Gen_Man',25000);
+
+1 row created.
+
+SQL> insert into job values(509,'Developer',20000);
+
+1 row created.
+
+SQL> insert into job values(525,'Mar_Dic',30000);
+
+1 row created.
+
+SQL> insert into job values(529,'Designer',20000);
+
+1 row created.
+
+SQL> insert into job values(538,'Sales_Exe',15000);
+
+1 row created.
+
+SQL> insert into job values(542,'Tester',20000);
+
+1 row created.
+
+SQL> select * from job;
+
+    EMP_ID EMP_TITLE  EMP_AVG_SALARY
+---------- ---------- --------------
+       501 Gen_Man             25000
+       509 Developer           20000
+       525 Mar_Dic             30000
+       529 Designer            20000
+       538 Sales_Exe           15000
+       542 Tester              20000
+
+6 rows selected.
+
+
+-->Inner Join:
+
+SQL>  select e.emp_Id,e.emp_Name,j.emp_Title from emp525 e INNER JOIN job j ON e.emp_Id=j.emp_Id;
+
+    EMP_ID EMP_NAME        EMP_TITLE
+---------- --------------- ----------
+       501 Majeed          Gen_Man
+       509 Karthik         Developer
+       525 Surya           Mar_Dic
+       529 Bharath         Designer
+       538 Sravan          Sales_Exe
+       542 Venkatesh       Tester
+
+6 rows selected.
+
+-->Cross Join:
+SQL>  select e.emp_Id,e.emp_Name,j.emp_Title FROM emp525 e CROSS JOIN job  j ORDER by j.emp_Id;
+
+    EMP_ID EMP_NAME        EMP_TITLE
+---------- --------------- ----------
+       501 Majeed          Gen_Man
+       509 Karthik         Gen_Man
+       525 Surya           Gen_Man
+       529 Bharath         Gen_Man
+       538 Sravan          Gen_Man
+       542 Venkatesh       Gen_Man
+       501 Majeed          Developer
+       509 Karthik         Developer
+       525 Surya           Developer
+       529 Bharath         Developer
+       538 Sravan          Developer
+
+    EMP_ID EMP_NAME        EMP_TITLE
+---------- --------------- ----------
+       542 Venkatesh       Developer
+       501 Majeed          Mar_Dic
+       509 Karthik         Mar_Dic
+       525 Surya           Mar_Dic
+       529 Bharath         Mar_Dic
+       538 Sravan          Mar_Dic
+       542 Venkatesh       Mar_Dic
+       501 Majeed          Designer
+       509 Karthik         Designer
+       525 Surya           Designer
+       529 Bharath         Designer
+
+    EMP_ID EMP_NAME        EMP_TITLE
+---------- --------------- ----------
+       538 Sravan          Designer
+       542 Venkatesh       Designer
+       501 Majeed          Sales_Exe
+       509 Karthik         Sales_Exe
+       525 Surya           Sales_Exe
+       529 Bharath         Sales_Exe
+       538 Sravan          Sales_Exe
+       542 Venkatesh       Sales_Exe
+       501 Majeed          Tester
+       509 Karthik         Tester
+       525 Surya           Tester
+
+    EMP_ID EMP_NAME        EMP_TITLE
+---------- --------------- ----------
+       529 Bharath         Tester
+       538 Sravan          Tester
+       542 Venkatesh       Tester
+
+36 rows selected.
+
+
+--> Right Join:
+SQL>  select e.emp_Id,e.emp_Name,j.emp_Title FROM emp525 e RIGHT JOIN job j ON e.emp_Id=j.emp_Id ORDER by j.emp_Id;
+
+    EMP_ID EMP_NAME        EMP_TITLE
+---------- --------------- ----------
+       501 Majeed          Gen_Man
+       509 Karthik         Developer
+       525 Surya           Mar_Dic
+       529 Bharath         Designer
+       538 Sravan          Sales_Exe
+       542 Venkatesh       Tester
+
+6 rows selected.
+
+-->Left Join:
+
+SQL> select e.emp_Id,e.emp_Name,j.emp_Title FROM emp525 e LEFT JOIN job j ON e.emp_Id=j.emp_Id ORDER by j.emp_Id;
+
+    EMP_ID EMP_NAME        EMP_TITLE
+---------- --------------- ----------
+       501 Majeed          Gen_Man
+       509 Karthik         Developer
+       525 Surya           Mar_Dic
+       529 Bharath         Designer
+       538 Sravan          Sales_Exe
+       542 Venkatesh       Tester
+
+6 rows selected.
+
+
+-->Left Outer Join:
+
+SQL>  select e.emp_Id,e.emp_Name,j.emp_Title FROM emp525 e LEFT OUTER JOIN job j ON e.emp_Id=j.emp_Id;
+
+    EMP_ID EMP_NAME        EMP_TITLE
+---------- --------------- ----------
+       501 Majeed          Gen_Man
+       509 Karthik         Developer
+       525 Surya           Mar_Dic
+       529 Bharath         Designer
+       538 Sravan          Sales_Exe
+       542 Venkatesh       Tester
+
+6 rows selected.
+
+
+-->Right Outer Join:
+
+SQL> select e.emp_Id,e.emp_Name,j.emp_Title FROM emp525 e RIGHT OUTER JOIN job j ON e.emp_Id=j.emp_Id;
+
+    EMP_ID EMP_NAME        EMP_TITLE
+---------- --------------- ----------
+       501 Majeed          Gen_Man
+       509 Karthik         Developer
+       525 Surya           Mar_Dic
+       529 Bharath         Designer
+       538 Sravan          Sales_Exe
+       542 Venkatesh       Tester
+
+6 rows selected.

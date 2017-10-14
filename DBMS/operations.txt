@@ -1,0 +1,402 @@
+
+--> comparison conditions:
+
+SQL> select * from sailors where sid=58;
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+58 rusty              10         35
+
+SQL> select * from sailors where sid=any(22,29,31);
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+22 dustin              7         45
+29 brutus              1         35
+31 lubber              8         55
+
+SQL>  select * from sailors where sid=some(22,29,31);
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+22 dustin              7         45
+29 brutus              1         35
+31 lubber              8         55
+
+SQL>  select * from sailors where sid=all(22,29,31);
+
+no rows selected
+
+SQL> select * from sailors where rating>5;
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+22 dustin              7         45
+31 lubber              8         55
+32 amdy                8         25
+58 rusty              10         35
+64 horatio             7         35
+71 zorba              10         16
+74 horatio             9         35
+
+7 rows selected.
+
+SQL> select * from sailors where sname='rusty';
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+58 rusty              10         35
+
+SQL> select * from sailors where sid!=22;
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+29 brutus              1         35
+31 lubber              8         55
+32 amdy                8         25
+58 rusty              10         35
+64 horatio             7         35
+71 zorba              10         16
+74 horatio             9         35
+85 art                 3         25
+95 bob                 3         25
+
+9 rows selected.
+
+
+-->logical conditions:
+
+SQL> select * from sailors where not sid=32;
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+22 dustin              7         45
+29 brutus              1         35
+31 lubber              8         55
+58 rusty              10         35
+64 horatio             7         35
+71 zorba              10         16
+74 horatio             9         35
+85 art                 3         25
+95 bob                 3         25
+
+9 rows selected.
+
+-->null conditions:
+SQL> select * from sailors where rating is null;
+
+no rows selected
+-->membership conditions:
+SQL> select * from sailors where age in(35,55);
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+29 brutus              1         35
+31 lubber              8         55
+58 rusty              10         35
+64 horatio             7         35
+74 horatio             9         35
+
+--> Range conditions:
+SQL> select * from sailors where age between 35 and 
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+22 dustin              7         45
+29 brutus              1         35
+31 lubber              8         55
+58 rusty              10         35
+64 horatio             7         35
+74 horatio             9         35
+
+6 rows selected.
+
+-->Pattern matching conditions:
+SQL> select * from sailors where sname like 'd%';
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+22 dustin              7         45
+
+SQL>  select * from sailors where sname like '%s';
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+29 brutus              1         35
+
+SQL> select * from sailors where sname like '_u%';
+
+SI SNAME          RATING        AGE
+-- ---------- ---------- ----------
+22 dustin              7         45
+31 lubber              8         55
+58 rusty              10         35
+
+-->Functions:
+
+
+1)single row functions
+
+a)abs(n):
+SQL> select abs(sid)from sailors;
+
+  ABS(SID)
+----------
+        22
+        29
+        31
+        32
+        58
+        64
+        71
+        74
+        85
+        95
+
+10 rows selected.
+
+b)sqrt(n):
+SQL> select sqrt(5) from dual;
+
+   SQRT(5)
+----------
+2.23606798
+
+
+SQL> set numwidth 20;
+SQL> select sqrt(5) from dual;
+
+             SQRT(5)
+--------------------
+2.236067977499789696
+
+c)floor:
+SQL> select floor(2.987) from dual;
+
+        FLOOR(2.987)
+--------------------
+                   2
+d)ceil:
+SQL> select ceil(2.986) from dual;
+
+         CEIL(2.986)
+--------------------
+                   3
+
+e)round(n,[m]):
+SQL>  select round(76.12,-2)from dual;
+
+ROUND(76.12,-2)
+---------------
+            100
+f)trunc(n,[m]):
+SQL> select trunc(2.76) from dual;
+
+         TRUNC(2.76)
+--------------------
+                   2
+
+g)power(n,m):
+SQL> select power(3.12,-4.8) from dual;
+
+    POWER(3.12,-4.8)
+--------------------
+ .004246762254958337
+
+h)sign:
+SQL> select sign(12),sign(-12),sign(0) from dual;
+
+            SIGN(12)            SIGN(-12)              SIGN(0)
+-------------------- -------------------- --------------------
+                   1                   -1                    0
+
+i)mod(n,m):
+SQL>  select mod(8,6)from dual;
+
+            MOD(8,6)
+--------------------
+                   2
+j)remainder(n,m):
+
+
+k)exp(n):
+SQL>  select exp(0),exp(5),exp(-5.6) from dual;
+
+              EXP(0)               EXP(5)            EXP(-5.6)
+-------------------- -------------------- --------------------
+                   1 148.4131591025766034 .0036978637164829308
+
+l)log(n,m):
+SQL> select log(10,1000),log(0.01,1.2) from dual;
+
+        LOG(10,1000)        LOG(0.01,1.2)
+-------------------- --------------------
+                   3 -.039590623023812414
+
+
+m) ln(n):
+SQL> select ln(3),log(2.71828182,3) from dual;
+
+               LN(3)    LOG(2.71828182,3)
+-------------------- --------------------
+1.098612288668109691 1.098612292086890994
+
+
+(2) character functions which returns character values:
+
+
+1.concat(str1,str2):
+SQL>  select concat('abc','defg') from dua
+
+CONCAT(
+-------
+abcdefgs
+
+SQL> select 'abc'||'dc'||'123' from dual;
+
+'ABC'||'
+--------
+abcdc123
+
+2.initcap(str):
+SQL> select initcap('the class') from dual;
+
+INITCAP('
+---------
+The Class
+
+3.upper(str):
+SQL> select upper('the class') from dual;
+
+UPPER('TH
+---------
+THE CLASS
+
+4.lower(str):
+SQL> select lower('The Class') from dual;
+
+LOWER('TH
+---------
+the class
+
+5.replace(str,searchstr[replacement str]):
+SQL> select replace('the an and the and','and','1234') from dual;
+
+REPLACE('THEANANDTHE
+--------------------
+the an 1234 the 1234
+
+6.translate(str,fromstr,tostr):
+SQL> select translate('the an and the and','and','1234') from dual;
+
+TRANSLATE('THEANAN
+------------------
+the 12 123 the 123
+
+7.substr(str,position[length]):
+SQL> select substr('abcde12345abcde',0,4) from dual;
+
+SUBS
+----
+abcd
+8.lpad(str,n[set]):
+
+SQL> select sname,lpad(sname,15,'*') from sailors;
+
+SNAME      LPAD(SNAME,15,'
+---------- ---------------
+dustin     *********dustin
+brutus     *********brutus
+lubber     *********lubber
+amdy       ***********amdy
+rusty      **********rusty
+horatio    ********horatio
+zorba      **********zorba
+horatio    ********horatio
+art        ************art
+bob        ************bob
+
+10 rows selected.
+
+
+9.rpad(str,n[set]):
+SQL> select sid,rpad(sid,10) from sailors;
+
+SI RPAD(SID,1
+-- ----------
+22 22
+29 29
+31 31
+32 32
+58 58
+64 64
+71 71
+74 74
+85 85
+95 95
+
+10 rows selected.
+
+10.ltrim(str[set]):
+SQL>  select ltrim('ababcabcbab','ba') from dual;
+
+LTRIM('
+-------
+cabcbab
+
+11.rtrim(str[set]):
+SQL> select rtrim('ababcabcbab','ba') from dual;
+
+RTRIM('A
+--------
+ababcabc
+
+12.soundex(str):
+SQL> select * from sailors where soundex(sname)=soundex('dustin');
+
+SI SNAME                    RATING                  AGE
+-- ---------- -------------------- --------------------
+22 dustin                        7                   45
+
+(3) character function that returns numeric values:
+
+
+1.ascii(str):
+SQL> select ascii('a') from dual;
+
+          ASCII('A')
+--------------------
+                  97
+
+SQL>  select ascii('A') from dual;
+
+          ASCII('A')
+--------------------
+                  65
+
+
+2.length(str):
+SQL> select length('abc'),length(n'abc') from dual;
+
+       LENGTH('ABC')       LENGTH(N'ABC')
+-------------------- --------------------
+                   3                    3
+
+3.lengthb(str):
+SQL>  select lengthb('abc'),lengthb(n'abc') from dual;
+
+      LENGTHB('ABC')      LENGTHB(N'ABC')
+-------------------- --------------------
+                   3                    6
+4.instr(str,substr[position],[occurrence]):
+SQL> select instr('the and the and the','the',1,2) from dual;
+
+INSTR('THEANDTHEANDTHE','THE',1,2)
+----------------------------------
+                                 9
+SQL> select instr('the and the and the','the',1,5) from dual;
+
+INSTR('THEANDTHEANDTHE','THE',1,5)
+----------------------------------
+                                 0
+

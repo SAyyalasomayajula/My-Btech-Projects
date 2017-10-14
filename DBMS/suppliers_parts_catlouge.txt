@@ -1,0 +1,58 @@
+SQL>  create table suppliers(sid integer,sname varchar(15),address_city varchar(20));
+
+Table created.
+
+SQL> desc suppliers;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(38)
+ SNAME                                              VARCHAR2(15)
+ ADDRESS_CITY                                       VARCHAR2(20)
+
+
+SQL>  create table parts(pid integer,pname varchar(15),colour varchar(10));
+
+Table created.
+
+SQL> desc parts;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PID                                                NUMBER(38)
+ PNAME                                              VARCHAR2(15)
+ COLOUR                                             VARCHAR2(10)
+
+
+SQL>  create table catlouge(sid integer,pid integer,cost real);
+
+Table created.
+
+SQL> desc catlouge;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(38)
+ PID                                                NUMBER(38)
+ COST                                               FLOAT(63)
+
+SQL> insert into suppliers values(100,'shanzz','hyd');
+
+1 row created.
+SQL> insert into suppliers values(101,'samzz','mum');
+
+1 row created.
+
+SQL> insert into suppliers values(102,'bharath parts','kol');
+
+1 row created.
+
+SQL> insert into suppliers values(103,'sravs.pvt.ltd','che');
+
+1 row created.
+
+SQL> select * from suppliers;
+
+       SID SNAME           ADDRESS_CITY
+---------- --------------- --------------------
+       100 shanzz          hyd
+       101 samzz           mum
+       102 bharath parts   kol
+       103 sravs.pvt.ltd   che

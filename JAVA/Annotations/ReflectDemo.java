@@ -1,0 +1,31 @@
+import java.lang.Annotation.*;
+import java.lang.Ref.*;
+@Retentation(RetentationPolicy.RUNTIME)
+@ interface Reflect_Demo
+{
+	String S();
+	int V();
+}
+class ReflectDemo 
+{
+	@Reflect_Demo(S="Hey",V=30)
+	public static void AnMethod()
+	{
+		ReflectDemo R=new ReflectDemo();
+		try
+		{
+			Class x=R.getClass();
+			Method y=R.getMethod("AnMethod");
+			Reflect_Demo R2=y.getAnnotation(Reflect_Anno.class);
+			System.out.println(R2.S()+" "+R2.V());
+		}
+		catch (NoSuchMethodException e)
+		{
+			System.out.println("No Such Method!");
+		}
+	}
+	public static void main(String[] args) 
+	{
+		AnMethod();
+	}
+}

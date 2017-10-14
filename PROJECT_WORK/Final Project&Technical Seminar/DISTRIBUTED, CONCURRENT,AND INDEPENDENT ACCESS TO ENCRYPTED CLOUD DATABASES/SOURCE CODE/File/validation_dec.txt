@@ -1,0 +1,12 @@
+jQuery Set Maximum Length to Textarea or jQuery Check Textarea Maxlength:
+
+
+http://www.aspdotnet-suresh.com/2013/12/jquery-set-maximum-length-to-textarea.html
+
+jQuery - Allow Only Numbers (Numerics) in Textbox using JavaScript:
+
+http://www.aspdotnet-suresh.com/2013/04/jquery-allow-only-numbers-in-textbox.html
+
+jQuery Validate Registration Form Before Submit on Button Click:
+
+http://www.aspdotnet-suresh.com/2013/10/jquery-validate-registration-form-before-submit.html

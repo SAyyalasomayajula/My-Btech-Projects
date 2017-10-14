@@ -1,0 +1,19 @@
+Id Generation:
+
+ public int fileid()
+    {
+        cn.Open();
+        cmd1 = new SqlCommand("select max(fileid) from ownerfiles", cn);
+        id = Convert.ToString(cmd1.ExecuteScalar());
+        if (id == "")
+        {
+            fid = 1;
+        }
+        else
+        {
+            fid = Convert.ToInt16(id);
+            fid = fid + 1;
+        }
+        cn.Close();
+        return fid;
+    }

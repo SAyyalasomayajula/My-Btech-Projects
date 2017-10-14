@@ -1,0 +1,20 @@
+<html>
+<head>
+<title>Fibonacii</title>
+</head>
+<body>
+<script language="javascript">
+var n= prompt("Enter n value:","0");
+var i,fib1=0,fib2=1,fib3;
+document.writeln("Fibonacii series is:"+fib1+" "+fib2);
+for (i=3;i<=n;i++ )
+{
+	fib3=fib1+fib2;
+	fib1=fib2;
+	fib2=fib3;
+	document.writeln(" "+fib3);
+}
+document.writeln("Factorial of given no "+n+" is:"+fact);
+</script>
+</body>
+</html>

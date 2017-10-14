@@ -1,0 +1,97 @@
+SQL> create table  std1(sid integer,Sname varchar(20),login char(20),age integer,gpa real, primary k
+ey(sid));
+
+Table created.
+
+SQL> desc std1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                       NOT NULL NUMBER(38)
+ SNAME                                              VARCHAR2(20)
+ LOGIN                                              CHAR(20)
+ AGE                                                NUMBER(38)
+ GPA                                                FLOAT(63)
+
+SQL> insert into std1 values(50000,'Dave','Dave@cs',19,3.3);
+
+1 row created.
+
+SQL>  insert into std1 values(53666,'Jones','Jones@cs',18,2.4);
+
+1 row created.
+
+SQL>  insert into std1 values(53688,'Smith','Smith@cs',18,5.6);
+
+1 row created.
+
+SQL>  insert into std1 values(53650,'Smith','Smith@cs',18,2.5);
+
+1 row created.
+
+SQL>  insert into std1 values(53831,'Madayan','Madayan@cs',19,3.4);
+
+1 row created.
+
+SQL>  insert into std1 values(53832,'Guldu','Guldu@cs',16,2.5);
+
+1 row created.
+
+
+SQL> select * from std1;
+
+       SID SNAME                LOGIN                       AGE        GPA
+---------- -------------------- -------------------- ---------- ----------
+     50000 Dave                 Dave@cs                      19        3.3
+     53666 Jones                Jones@cs                     18        2.4
+     53688 Smith                Smith@cs                     18        5.6
+     53650 Smith                Smith@cs                     18        2.5
+     53831 Madayan              Madayan@cs                   19        3.4
+     53832 Guldu                Guldu@cs                     16        2.5
+
+6 rows selected.
+
+
+
+SQL>  create table enrolled (std_id number(5),c_id char(20),grade char(3),primary key(c_id),foreign 
+key(std_id)references std1);
+
+Table created.
+
+SQL>  insert into enrolled values(53831,'carnatic 101','c');
+
+1 row created.
+
+SQL>  insert into enrolled values(53832,'reggae 203','b');
+
+1 row created.
+
+SQL>  insert into enrolled values(53650,'topology 112','a');
+
+1 row created.
+
+SQL>  insert into enrolled values(53666,'history 105','b');
+
+1 row created.
+
+SQL> select * from enrolled;
+
+    STD_ID C_ID                 GRA
+---------- -------------------- ---
+     53831 carnatic 101         c
+     53832 reggae 203           b
+     53650 topology 112         a
+     53666 history 105          b
+
+4 rows selected.
+
+SQL>  select s.sname,s.login from std1 s where s.age<18;
+
+SNAME                LOGIN
+-------------------- --------------------
+Guldu                Guldu@cs
+
+SQL>  select s.sname,e.c_id from std1 s,enrolled e where s.sid=e.std_id and e.grade='a';
+
+SNAME                C_ID
+-------------------- --------------------
+Smith                topology 112
